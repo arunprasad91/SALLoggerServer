@@ -134,3 +134,8 @@ div#countdownTimer h3 {
     padding-top: 15px;
     font-size: 26px;
 }
+
+.graphVisualization svg {
+    height: 300px;
+    width: 330px;
+}

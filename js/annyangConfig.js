@@ -32,10 +32,15 @@ $(document).ready(function () {
     function isNumber(n) {
         return !isNaN(parseFloat(n)) && isFinite(n);
     }
+    
+    var loggeruserid = "u20";
+    var loggerid = "loggerinfo2";    
+    var loggername = "mylogger1";
 
 
     $.ajax({
-        url: 'http://belos.it.usyd.edu.au:1234/code/u20/show/loggerinfo2/testlogger',
+//        url: 'http://belos.it.usyd.edu.au:1234/code/u20/show/loggerinfo2/testlogger',
+        url: 'http://belos.it.usyd.edu.au:1234/code/' + loggeruserid + '/show/' + loggerid + '/' + loggername,
         type: 'GET',
 //        data: JSON.stringify(arr),
         dataType: 'json',
@@ -55,73 +60,191 @@ $(document).ready(function () {
 
                         if (parseInt(number) == presentIndex) {
 
-                            $.ajax({
-                                url: 'http://belos.it.usyd.edu.au:1234/code/u20/testlogger/log/' + element.TITLE + '=done',
-                                type: 'GET',
-                                dataType: 'text',
-                                success: function (msgStatus) {
-                                    if (msgStatus == 'ok') {
+                            var todo = 0;
 
-                                        $.ajax({
-                                            url: 'http://belos.it.usyd.edu.au:1234/code/u20/show/loggerinfo2/testlogger',
-                                            type: 'GET',
-                                            dataType: 'json',
-                                            beforeSend: function () {
-                                                $('#overlay').css('display', 'block');
-                                            },
-                                            success: function (msg) {
-                                                $('#overlay').css('display', 'none');
-                                                var newGoals = msg.GOALS;
+                            if (element.TYPE == 'countdowntimer') {
 
-                                                $.each(newGoals, function (index, element) {
+                                var timeMessage = element.TIMER;
+                                var time = timeMessage.split(':');
 
-                                                    var newPresentIndex = index + 1;
-                                                    if (parseInt(number) == newPresentIndex) {
+                                $('#countdownTimer').css('display', 'inline-block');
+                                annyang.pause();
+                                function getTimeRemaining(endtime) {
+                                    var t = Date.parse(endtime) - Date.parse(new Date());
+                                    var seconds = Math.floor((t / 1000) % 60);
+                                    var minutes = Math.floor((t / 1000 / 60) % 60);
+                                    var hours = Math.floor((t / (1000 * 60 * 60)) % 24);
+                                    return {
+                                        'total': t,
+                                        'minutes': minutes,
+                                        'seconds': seconds
+                                    };
+                                }
 
-                                                        var total = newGoals.length;
+                                function initializeClock(id, endtime) {
+                                    var clock = document.getElementById(id);
+                                    var minutesSpan = clock.querySelector('.minutes');
+                                    var secondsSpan = clock.querySelector('.seconds');
+
+                                    function updateClock() {
+                                        var t = getTimeRemaining(endtime);
+
+                                        minutesSpan.innerHTML = ('0' + t.minutes).slice(-2);
+                                        secondsSpan.innerHTML = ('0' + t.seconds).slice(-2);
+
+                                        if (t.total <= 0) {
+                                            clearInterval(timeinterval);
+                                            annyang.resume();
+                                            $('#countdownTimer').css('display', 'none');
+
+                                            $.ajax({
+                                                url: 'http://belos.it.usyd.edu.au:1234/code/' + loggeruserid + '/' + loggername + '/log/' + element.TITLE + '=done',
+                                                type: 'GET',
+                                                dataType: 'text',
+                                                success: function (msgStatus) {
+                                                    if (msgStatus == 'ok') {
+
+                                                        $.ajax({
+//                                                            url: 'http://belos.it.usyd.edu.au:1234/code/u20/show/loggerinfo2/testlogger',
+                                                            url: 'http://belos.it.usyd.edu.au:1234/code/' + loggeruserid + '/show/' + loggerid + '/' + loggername,
+                                                            type: 'GET',
+                                                            dataType: 'json',
+                                                            beforeSend: function () {
+                                                                $('#overlay').css('display', 'block');
+                                                            },
+                                                            success: function (msg) {
+                                                                $('#overlay').css('display', 'none');
+                                                                var newGoals = msg.GOALS;
+
+                                                                $.each(newGoals, function (index, element) {
+
+                                                                    var newPresentIndex = index + 1;
+                                                                    if (parseInt(number) == newPresentIndex) {
+
+                                                                        var total = newGoals.length;
 
 //                                            $.each(msg, function (index, element) {
 
-                                                        var percentage = parseFloat(parseInt(element.TODAYCOUNT, 10) * 100) / parseInt(element.TARGET, 10);
-                                                        var set = "Morris.Donut({"
-                                                                + "element: 'task-" + presentIndex + "',";
-                                                        if (percentage < 30)
-                                                            set = set + "colors: ['" + color1[0] + "', '" + color2[0] + "'],";
-                                                        else if (percentage > 30 && percentage < 70)
-                                                            set = set + "colors: ['" + color1[1] + "', '" + color2[1] + "'],";
-                                                        else if (percentage > 70)
-                                                            set = set + "colors: ['" + color1[2] + "', '" + color2[3] + "'],";
-                                                        set = set + "data: [";
+                                                                        var percentage = parseFloat(parseInt(element.TODAYCOUNT, 10) * 100) / parseInt(element.TARGET, 10);
+                                                                        var set = "Morris.Donut({"
+                                                                                + "element: 'task-" + presentIndex + "',";
+                                                                        if (percentage < 30)
+                                                                            set = set + "colors: ['" + color1[0] + "', '" + color2[0] + "'],";
+                                                                        else if (percentage > 30 && percentage < 70)
+                                                                            set = set + "colors: ['" + color1[1] + "', '" + color2[1] + "'],";
+                                                                        else if (percentage > 70)
+                                                                            set = set + "colors: ['" + color1[2] + "', '" + color2[3] + "'],";
+                                                                        set = set + "data: [";
 
-                                                        set = set + "{value: " + element.TODAYCOUNT + ",label: 'Task " + presentIndex + " - " + element.TITLE + "', labelColor: '#ffffff', formatted: '" + element.TODAYCOUNT + "'" + "},";
+                                                                        set = set + "{value: " + element.TODAYCOUNT + ",label: 'Task " + presentIndex + " - " + element.TITLE + "', labelColor: '#ffffff', formatted: '" + element.TODAYCOUNT + "'" + "},";
 
-                                                        var rest = 0;
-                                                        if (parseInt(element.TODAYCOUNT) < parseInt(element.TARGET))
-                                                            rest = parseInt(element.TARGET) - parseInt(element.TODAYCOUNT);
+                                                                        var rest = 0;
+                                                                        if (parseInt(element.TODAYCOUNT) < parseInt(element.TARGET))
+                                                                            rest = parseInt(element.TARGET) - parseInt(element.TODAYCOUNT);
 
-                                                        set = set + "{value: " + rest + ",label: 'Task " + presentIndex + " - " + element.TITLE + "', labelColor: '#ffffff', formatted: '" + element.TODAYCOUNT + "'" + "}";
-                                                        set = set + "],"
-                                                                + "formatter: function (x, data) { return data.formatted; }"
-                                                                + "});";
+                                                                        set = set + "{value: " + rest + ",label: 'Task " + presentIndex + " - " + element.TITLE + "', labelColor: '#ffffff', formatted: '" + element.TODAYCOUNT + "'" + "}";
+                                                                        set = set + "],"
+                                                                                + "formatter: function (x, data) { return data.formatted; }"
+                                                                                + "});";
 
-                                                        $('#task-' + presentIndex).empty();
-                                                        eval(set);
-                                                        prettyPrint();
+                                                                        $('#task-' + presentIndex).empty();
+                                                                        eval(set);
+                                                                        prettyPrint();
 
-                                                        annyang.pause();
-                                                        var toSpeak = "task " + element.ID + ", successfully logged";
-                                                        responsiveVoice.speak(toSpeak);
-                                                        annyang.resume();
+                                                                        annyang.pause();
+                                                                        var toSpeak = "task " + element.ID + ", successfully logged";
+                                                                        responsiveVoice.speak(toSpeak);
+                                                                        annyang.resume();
 //                                            });
+                                                                    }
+                                                                });
+
+                                                            }
+                                                        });
+
                                                     }
-                                                });
-
-                                            }
-                                        });
-
+                                                }
+                                            });
+                                        }
                                     }
+
+                                    updateClock();
+                                    var timeinterval = setInterval(updateClock, 1000);
                                 }
-                            });
+
+//                                var deadline = new Date(Date.parse(new Date()) + 01 * 10 * 1000);
+                                var deadline = new Date(Date.parse(new Date()) + (time[0]+1) * time[1] * 1000);
+                                initializeClock('clockdiv', deadline);
+                            } else if (element.TYPE == 'tap') {
+                                $.ajax({
+                                    url: 'http://belos.it.usyd.edu.au:1234/code/' + loggeruserid + '/' + loggername + '/log/' + element.TITLE + '=done',
+                                    type: 'GET',
+                                    dataType: 'text',
+                                    success: function (msgStatus) {
+                                        if (msgStatus == 'ok') {
+
+                                            $.ajax({
+//                                                url: 'http://belos.it.usyd.edu.au:1234/code/u20/show/loggerinfo2/testlogger',
+                                                url: 'http://belos.it.usyd.edu.au:1234/code/' + loggeruserid + '/show/' + loggerid + '/' + loggername,
+                                                type: 'GET',
+                                                dataType: 'json',
+                                                beforeSend: function () {
+                                                    $('#overlay').css('display', 'block');
+                                                },
+                                                success: function (msg) {
+                                                    $('#overlay').css('display', 'none');
+                                                    var newGoals = msg.GOALS;
+
+                                                    $.each(newGoals, function (index, element) {
+
+                                                        var newPresentIndex = index + 1;
+                                                        if (parseInt(number) == newPresentIndex) {
+
+                                                            var total = newGoals.length;
+
+//                                            $.each(msg, function (index, element) {
+
+                                                            var percentage = parseFloat(parseInt(element.TODAYCOUNT, 10) * 100) / parseInt(element.TARGET, 10);
+                                                            var set = "Morris.Donut({"
+                                                                    + "element: 'task-" + presentIndex + "',";
+                                                            if (percentage < 30)
+                                                                set = set + "colors: ['" + color1[0] + "', '" + color2[0] + "'],";
+                                                            else if (percentage > 30 && percentage < 70)
+                                                                set = set + "colors: ['" + color1[1] + "', '" + color2[1] + "'],";
+                                                            else if (percentage > 70)
+                                                                set = set + "colors: ['" + color1[2] + "', '" + color2[3] + "'],";
+                                                            set = set + "data: [";
+
+                                                            set = set + "{value: " + element.TODAYCOUNT + ",label: 'Task " + presentIndex + " - " + element.TITLE + "', labelColor: '#ffffff', formatted: '" + element.TODAYCOUNT + "'" + "},";
+
+                                                            var rest = 0;
+                                                            if (parseInt(element.TODAYCOUNT) < parseInt(element.TARGET))
+                                                                rest = parseInt(element.TARGET) - parseInt(element.TODAYCOUNT);
+
+                                                            set = set + "{value: " + rest + ",label: 'Task " + presentIndex + " - " + element.TITLE + "', labelColor: '#ffffff', formatted: '" + element.TODAYCOUNT + "'" + "}";
+                                                            set = set + "],"
+                                                                    + "formatter: function (x, data) { return data.formatted; }"
+                                                                    + "});";
+
+                                                            $('#task-' + presentIndex).empty();
+                                                            eval(set);
+                                                            prettyPrint();
+
+                                                            annyang.pause();
+                                                            var toSpeak = "task " + element.ID + ", successfully logged";
+                                                            responsiveVoice.speak(toSpeak);
+                                                            annyang.resume();
+//                                            });
+                                                        }
+                                                    });
+
+                                                }
+                                            });
+
+                                        }
+                                    }
+                                });
+                            }
                         }
                     });
                 }
@@ -133,75 +256,183 @@ $(document).ready(function () {
                         var presentIndex = index + 1;
 
                         if (task == (element.TITLE).toLowerCase()) {
-//                            alert(element.goalId);
-//                            var insertArray = {
-//                                function: 'insertTask',
-//                                goalId: element.goalId
-//                            };
 
-                            $.ajax({
-                                url: 'http://belos.it.usyd.edu.au:1234/code/u20/testlogger/log/' + element.TITLE + '=done',
-                                type: 'GET',
-                                dataType: 'text',
-                                success: function (msgStatus) {
+                            if (element.TYPE == 'countdowntimer') {
+                                annyang.pause();
 
-                                    if (msgStatus == 'ok') {
 
-                                        $.ajax({
-                                            url: 'http://belos.it.usyd.edu.au:1234/code/u20/show/loggerinfo2/testlogger',
-                                            type: 'GET',
-                                            dataType: 'json',
-                                            beforeSend: function () {
-                                                $('#overlay').css('display', 'block');
-                                            },
-                                            success: function (msg) {
-                                                $('#overlay').css('display', 'none');
-                                                var newGoals = msg.GOALS;
+                                var timeMessage = element.TIMER;
+                                var time = timeMessage.split(':');
 
-                                                $.each(newGoals, function (index, element) {
-                                                    var total = newGoals.length;
-                                                    if (task == (element.TITLE).toLowerCase()) {
+                                $('#countdownTimer').css('display', 'inline-block');
+                                function getTimeRemaining(endtime) {
+                                    var t = Date.parse(endtime) - Date.parse(new Date());
+                                    var seconds = Math.floor((t / 1000) % 60);
+                                    var minutes = Math.floor((t / 1000 / 60) % 60);
+                                    var hours = Math.floor((t / (1000 * 60 * 60)) % 24);
+                                    return {
+                                        'total': t,
+                                        'minutes': minutes,
+                                        'seconds': seconds
+                                    };
+                                }
+
+                                function initializeClock(id, endtime) {
+                                    var clock = document.getElementById(id);
+                                    var minutesSpan = clock.querySelector('.minutes');
+                                    var secondsSpan = clock.querySelector('.seconds');
+
+                                    function updateClock() {
+                                        var t = getTimeRemaining(endtime);
+
+                                        minutesSpan.innerHTML = ('0' + t.minutes).slice(-2);
+                                        secondsSpan.innerHTML = ('0' + t.seconds).slice(-2);
+
+                                        if (t.total <= 0) {
+                                            clearInterval(timeinterval);
+                                            $('#countdownTimer').css('display', 'none');
+                                            annyang.resume();
+
+                                            $.ajax({
+                                                url: 'http://belos.it.usyd.edu.au:1234/code/' + loggeruserid + '/' + loggername + '/log/' + element.TITLE + '=done',
+                                                type: 'GET',
+                                                dataType: 'text',
+                                                success: function (msgStatus) {
+
+                                                    if (msgStatus == 'ok') {
+
+                                                        $.ajax({
+//                                                            url: 'http://belos.it.usyd.edu.au:1234/code/u20/show/loggerinfo2/testlogger',
+                                                            url: 'http://belos.it.usyd.edu.au:1234/code/' + loggeruserid + '/show/' + loggerid + '/' + loggername,
+                                                            type: 'GET',
+                                                            dataType: 'json',
+                                                            beforeSend: function () {
+                                                                $('#overlay').css('display', 'block');
+                                                            },
+                                                            success: function (msg) {
+                                                                $('#overlay').css('display', 'none');
+                                                                var newGoals = msg.GOALS;
+
+                                                                $.each(newGoals, function (index, element) {
+                                                                    var total = newGoals.length;
+                                                                    if (task == (element.TITLE).toLowerCase()) {
 //                                            $.each(msg, function (index, element) {
 
-                                                        var percentage = parseFloat(parseInt(element.TODAYCOUNT, 10) * 100) / parseInt(element.TARGET, 10);
-                                                        var set = "Morris.Donut({"
-                                                                + "element: 'task-" + presentIndex + "',";
-                                                        if (percentage < 30)
-                                                            set = set + "colors: ['" + color1[0] + "', '" + color2[0] + "'],";
-                                                        else if (percentage > 30 && percentage < 70)
-                                                            set = set + "colors: ['" + color1[1] + "', '" + color2[1] + "'],";
-                                                        else if (percentage > 70)
-                                                            set = set + "colors: ['" + color1[2] + "', '" + color2[3] + "'],";
-                                                        set = set + "data: [";
+                                                                        var percentage = parseFloat(parseInt(element.TODAYCOUNT, 10) * 100) / parseInt(element.TARGET, 10);
+                                                                        var set = "Morris.Donut({"
+                                                                                + "element: 'task-" + presentIndex + "',";
+                                                                        if (percentage < 30)
+                                                                            set = set + "colors: ['" + color1[0] + "', '" + color2[0] + "'],";
+                                                                        else if (percentage > 30 && percentage < 70)
+                                                                            set = set + "colors: ['" + color1[1] + "', '" + color2[1] + "'],";
+                                                                        else if (percentage > 70)
+                                                                            set = set + "colors: ['" + color1[2] + "', '" + color2[3] + "'],";
+                                                                        set = set + "data: [";
 
-                                                        set = set + "{value: " + element.TODAYCOUNT + ",label: 'Task " + presentIndex + " - " + element.TITLE + "', labelColor: '#ffffff', formatted: '" + element.TODAYCOUNT + "'" + "},";
+                                                                        set = set + "{value: " + element.TODAYCOUNT + ",label: 'Task " + presentIndex + " - " + element.TITLE + "', labelColor: '#ffffff', formatted: '" + element.TODAYCOUNT + "'" + "},";
 
-                                                        var rest = 0;
-                                                        if (parseInt(element.TODAYCOUNT) < parseInt(element.TARGET))
-                                                            rest = parseInt(element.TARGET) - parseInt(element.TODAYCOUNT);
+                                                                        var rest = 0;
+                                                                        if (parseInt(element.TODAYCOUNT) < parseInt(element.TARGET))
+                                                                            rest = parseInt(element.TARGET) - parseInt(element.TODAYCOUNT);
 
-                                                        set = set + "{value: " + rest + ",label: 'Task " + presentIndex + " - " + element.TITLE + "', labelColor: '#ffffff', formatted: '" + element.TODAYCOUNT + "'" + "}";
-                                                        set = set + "],"
-                                                                + "formatter: function (x, data) { return data.formatted; }"
-                                                                + "});";
+                                                                        set = set + "{value: " + rest + ",label: 'Task " + presentIndex + " - " + element.TITLE + "', labelColor: '#ffffff', formatted: '" + element.TODAYCOUNT + "'" + "}";
+                                                                        set = set + "],"
+                                                                                + "formatter: function (x, data) { return data.formatted; }"
+                                                                                + "});";
 
-                                                        $('#task-' + presentIndex).empty();
-                                                        eval(set);
-                                                        prettyPrint();
+                                                                        $('#task-' + presentIndex).empty();
+                                                                        eval(set);
+                                                                        prettyPrint();
 
-                                                        annyang.pause();
-                                                        var toSpeak = "task " + element.TITLE + ", successfully logged";
-                                                        responsiveVoice.speak(toSpeak);
-                                                        annyang.resume();
+                                                                        annyang.pause();
+                                                                        var toSpeak = "task " + element.TITLE + ", successfully logged";
+                                                                        responsiveVoice.speak(toSpeak);
+                                                                        annyang.resume();
 //                                            });
-                                                    }
-                                                });
+                                                                    }
+                                                                });
 
-                                            }
-                                        });
+                                                            }
+                                                        });
+                                                    }
+                                                }
+                                            });
+
+                                        }
                                     }
+
+                                    updateClock();
+                                    var timeinterval = setInterval(updateClock, 1000);
                                 }
-                            });
+
+                                var deadline = new Date(Date.parse(new Date()) + (time[0]+1) * time[1] * 1000);
+                                initializeClock('clockdiv', deadline);
+                            } else if (element.TYPE == 'tap') {
+                                $.ajax({
+                                    url: 'http://belos.it.usyd.edu.au:1234/code/' + loggeruserid + '/' + loggername + '/log/' + element.TITLE + '=done',
+                                    type: 'GET',
+                                    dataType: 'text',
+                                    success: function (msgStatus) {
+
+                                        if (msgStatus == 'ok') {
+
+                                            $.ajax({
+//                                                url: 'http://belos.it.usyd.edu.au:1234/code/u20/show/loggerinfo2/testlogger',
+                                                url: 'http://belos.it.usyd.edu.au:1234/code/' + loggeruserid + '/show/' + loggerid + '/' + loggername,
+                                                type: 'GET',
+                                                dataType: 'json',
+                                                beforeSend: function () {
+                                                    $('#overlay').css('display', 'block');
+                                                },
+                                                success: function (msg) {
+                                                    $('#overlay').css('display', 'none');
+                                                    var newGoals = msg.GOALS;
+
+                                                    $.each(newGoals, function (index, element) {
+                                                        var total = newGoals.length;
+                                                        if (task == (element.TITLE).toLowerCase()) {
+//                                            $.each(msg, function (index, element) {
+
+                                                            var percentage = parseFloat(parseInt(element.TODAYCOUNT, 10) * 100) / parseInt(element.TARGET, 10);
+                                                            var set = "Morris.Donut({"
+                                                                    + "element: 'task-" + presentIndex + "',";
+                                                            if (percentage < 30)
+                                                                set = set + "colors: ['" + color1[0] + "', '" + color2[0] + "'],";
+                                                            else if (percentage > 30 && percentage < 70)
+                                                                set = set + "colors: ['" + color1[1] + "', '" + color2[1] + "'],";
+                                                            else if (percentage > 70)
+                                                                set = set + "colors: ['" + color1[2] + "', '" + color2[3] + "'],";
+                                                            set = set + "data: [";
+
+                                                            set = set + "{value: " + element.TODAYCOUNT + ",label: 'Task " + presentIndex + " - " + element.TITLE + "', labelColor: '#ffffff', formatted: '" + element.TODAYCOUNT + "'" + "},";
+
+                                                            var rest = 0;
+                                                            if (parseInt(element.TODAYCOUNT) < parseInt(element.TARGET))
+                                                                rest = parseInt(element.TARGET) - parseInt(element.TODAYCOUNT);
+
+                                                            set = set + "{value: " + rest + ",label: 'Task " + presentIndex + " - " + element.TITLE + "', labelColor: '#ffffff', formatted: '" + element.TODAYCOUNT + "'" + "}";
+                                                            set = set + "],"
+                                                                    + "formatter: function (x, data) { return data.formatted; }"
+                                                                    + "});";
+
+                                                            $('#task-' + presentIndex).empty();
+                                                            eval(set);
+                                                            prettyPrint();
+
+                                                            annyang.pause();
+                                                            var toSpeak = "task " + element.TITLE + ", successfully logged";
+                                                            responsiveVoice.speak(toSpeak);
+                                                            annyang.resume();
+//                                            });
+                                                        }
+                                                    });
+
+                                                }
+                                            });
+                                        }
+                                    }
+                                });
+                            }
                         }
                     });
                 }
@@ -220,7 +451,7 @@ $(document).ready(function () {
 //                            };
 
                             $.ajax({
-                                url: 'http://belos.it.usyd.edu.au:1234/code/u20/testlogger/log/' + element.TITLE + '=undo',
+                                url: 'http://belos.it.usyd.edu.au:1234/code/' + loggeruserid + '/' + loggername + '/log/' + element.TITLE + '=undo',
                                 type: 'GET',
                                 dataType: 'text',
                                 success: function (msgStatus) {
@@ -228,7 +459,8 @@ $(document).ready(function () {
                                     if (msgStatus == 'ok') {
 
                                         $.ajax({
-                                            url: 'http://belos.it.usyd.edu.au:1234/code/u20/show/loggerinfo2/testlogger',
+//                                            url: 'http://belos.it.usyd.edu.au:1234/code/u20/show/loggerinfo2/testlogger',
+                                            url: 'http://belos.it.usyd.edu.au:1234/code/' + loggeruserid + '/show/' + loggerid + '/' + loggername,
                                             type: 'GET',
                                             dataType: 'json',
                                             beforeSend: function () {
@@ -304,14 +536,15 @@ $(document).ready(function () {
 //                            };
 
                             $.ajax({
-                                url: 'http://belos.it.usyd.edu.au:1234/code/u20/testlogger/log/' + element.TITLE + '=undo',
+                                url: 'http://belos.it.usyd.edu.au:1234/code/' + loggeruserid + '/' + loggername + '/log/' + element.TITLE + '=undo',
                                 type: 'GET',
                                 dataType: 'text',
                                 success: function (msgStatus) {
 
                                     if (msgStatus == 'ok') {
                                         $.ajax({
-                                            url: 'http://belos.it.usyd.edu.au:1234/code/u20/show/loggerinfo2/testlogger',
+//                                            url: 'http://belos.it.usyd.edu.au:1234/code/u20/show/loggerinfo2/testlogger',
+                                            url: 'http://belos.it.usyd.edu.au:1234/code/' + loggeruserid + '/show/' + loggerid + '/' + loggername,
                                             type: 'GET',
                                             dataType: 'json',
                                             beforeSend: function () {

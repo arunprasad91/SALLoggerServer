@@ -60,8 +60,9 @@ $(document).ready(function () {
         error: function (jqXHR, textStatus) {
             if (textStatus === 'timeout')
             {
-                $('#visualization').append('<div>Connection timed out!</div>')
-                //do something. Try again perhaps?
+                $('#visualization').append('<div>Connection timed out!</div>')              
+            } else {
+                $('#visualization').html('<p>Connection Error!</p>')
             }
         },
         success: function (msg) {

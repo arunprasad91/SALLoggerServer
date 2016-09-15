@@ -8,9 +8,13 @@ $(document).ready(function () {
     var color1 = ['#f44336', '#FFC107', '#4CAF50'];
     var color2 = ['#ef9a9a', '#FFE082', '#A5D6A7'];
 
+    var loggeruserid = "u20";
+    var loggerid = "loggerinfo2";
+    var loggername = "mylogger1";
+
     $.ajax({
-//        url: 'http://belos.it.usyd.edu.au:1234/code/u20/show/loggerinfo2/mylogger2',
-        url: 'http://belos.it.usyd.edu.au:1234/code/u20/show/loggerinfo2/testlogger',
+        url: 'http://belos.it.usyd.edu.au:1234/code/' + loggeruserid + '/show/' + loggerid + '/' + loggername,
+//        url: 'http://belos.it.usyd.edu.au:1234/code/u20/show/loggerinfo2/testlogger',
         type: 'GET',
 //        data: JSON.stringify(arr),
         dataType: 'json',
@@ -20,11 +24,12 @@ $(document).ready(function () {
         error: function (jqXHR, textStatus) {
             if (textStatus === 'timeout')
             {
-                $('#message2').html('<p>Connection timed out!</p>')
-                //do something. Try again perhaps?
+                $('#message2').html('<p>Connection timed out!</p>');
+            } else {
+                $('#message2').html('<p>Connection Error!</p>')
             }
         },
-        complete: function() {
+        complete: function () {
             identifier = '#services .container';
             $('html, body').animate({
                 scrollTop: $(identifier).offset().top
