@@ -33,7 +33,7 @@
                 <div class="row">
                     <div class="col-md-12">
                         <div id="loading">
-                            <img src="img/spinner.gif" alt=""/>
+                            <img src="img/loading.gif" alt=""/>
                         </div>
                         <div id="visualization"></div>
                     </div>				

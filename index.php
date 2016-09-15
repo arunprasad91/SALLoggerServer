@@ -15,7 +15,7 @@
         <link rel="stylesheet" type="text/css" href="css/style.css" />
         <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/prettify/r224/prettify.min.css">
         <link rel="stylesheet" href="css/morris.css">
-        
+
         <link rel="stylesheet" href="css/styleHomePage.css">
 
     </head>
@@ -35,8 +35,8 @@
                 <div class="header-info">
                     <h1>Logger</h1>
                     <p id="hello" class="hidden">Annyang!</p>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit,<br> sed do eiusmod
-                        tempor incididunt ut labore et dolore magna aliqua.
+                    <p>
+                        Simple Ambient Logger
                     </p>
                     <a href="#" class="btn btn-primary">Say 'Hello'</a>
                 </div>
@@ -58,7 +58,20 @@
                 <div class="row">
                     <div class="col-md-12">
                         <div id="loading">
-                            <img src="img/spinner.gif" alt=""/>
+                            <img src="img/loading.gif" alt=""/>
+                        </div>
+                        <div id="countdownTimer">
+                            <h3 id="countdownHeader">Countdown Clock</h3>
+                            <div id="clockdiv">
+                                <div>
+                                    <span class="minutes"></span>
+                                    <div class="smalltext">Minutes</div>
+                                </div>
+                                <div>
+                                    <span class="seconds"></span>
+                                    <div class="smalltext">Seconds</div>
+                                </div>
+                            </div>
                         </div>
                         <div id="visualization"></div>
                     </div>				
@@ -67,21 +80,21 @@
         </section>
         <!-- Services section end -->
         <!-- Footer start -->
-        <footer>
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-8">
-
-                    </div>
-                    <div class="col-md-4">
-
-                    </div>
-                </div>
-            </div>
-        </footer>
+        <!--        <footer>
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-8">
         
+                            </div>
+                            <div class="col-md-4">
+        
+                            </div>
+                        </div>
+                    </div>
+                </footer>-->
+
         <div id="overlay">
-            <img src="img/loader.gif" alt=""/>      
+            <img src="img/loading.gif" alt=""/>      
         </div>
         <!-- Footer end  -->
 
@@ -90,7 +103,7 @@
         <!-- Load jQuery -->
         <!--<script type="text/javascript" src="js/jquery-1.11.2.min.js"></script>-->
         <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
-        
+
         <!-- Load Booststrap -->
         <script type="text/javascript" src="js/bootstrap.js"></script>
 
@@ -101,19 +114,19 @@
 
         <!-- Annyang Config -->
         <script type="text/javascript" src="js/annyangConfig.js"></script>
-        
+
         <script src='https://code.responsivevoice.org/responsivevoice.js'></script>
-        
+
         <script src="http://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.2/raphael-min.js"></script>
-        
+
         <script src="http://cdnjs.cloudflare.com/ajax/libs/prettify/r224/prettify.min.js"></script>
 
         <!--Morris Graphs-->
         <script src="js/morris.js"></script>
-        
+
         <!--Graphs Initialization-->
         <script type="text/javascript" src="js/test.js"></script>
-        
-        
+
+
     </body>
 </html>

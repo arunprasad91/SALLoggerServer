@@ -27,7 +27,7 @@ $(document).ready(function () {
     responsiveVoice.setDefaultVoice("US English Female");
 
     var color1 = ['#f44336', '#FFC107', '#4CAF50'];
-    var color2 = ['#ffcdd2', '#FFECB3', '#C8E6C9'];
+    var color2 = ['#ef9a9a', '#FFE082', '#A5D6A7'];
 
     function isNumber(n) {
         return !isNaN(parseFloat(n)) && isFinite(n);
@@ -93,13 +93,13 @@ $(document).ready(function () {
                                                             set = set + "colors: ['" + color1[2] + "', '" + color2[3] + "'],";
                                                         set = set + "data: [";
 
-                                                        set = set + "{value: " + element.TODAYCOUNT + ",label: 'Task " + presentIndex + " - " + element.TITLE + "', formatted: '" + element.TODAYCOUNT + "'" + "},";
+                                                        set = set + "{value: " + element.TODAYCOUNT + ",label: 'Task " + presentIndex + " - " + element.TITLE + "', labelColor: '#ffffff', formatted: '" + element.TODAYCOUNT + "'" + "},";
 
                                                         var rest = 0;
                                                         if (parseInt(element.TODAYCOUNT) < parseInt(element.TARGET))
                                                             rest = parseInt(element.TARGET) - parseInt(element.TODAYCOUNT);
 
-                                                        set = set + "{value: " + rest + ",label: 'Task " + presentIndex + " - " + element.TITLE + "', formatted: '" + element.TODAYCOUNT + "'" + "}";
+                                                        set = set + "{value: " + rest + ",label: 'Task " + presentIndex + " - " + element.TITLE + "', labelColor: '#ffffff', formatted: '" + element.TODAYCOUNT + "'" + "}";
                                                         set = set + "],"
                                                                 + "formatter: function (x, data) { return data.formatted; }"
                                                                 + "});";
@@ -174,13 +174,13 @@ $(document).ready(function () {
                                                             set = set + "colors: ['" + color1[2] + "', '" + color2[3] + "'],";
                                                         set = set + "data: [";
 
-                                                        set = set + "{value: " + element.TODAYCOUNT + ",label: 'Task " + presentIndex + " - " + element.TITLE + "', formatted: '" + element.TODAYCOUNT + "'" + "},";
+                                                        set = set + "{value: " + element.TODAYCOUNT + ",label: 'Task " + presentIndex + " - " + element.TITLE + "', labelColor: '#ffffff', formatted: '" + element.TODAYCOUNT + "'" + "},";
 
                                                         var rest = 0;
                                                         if (parseInt(element.TODAYCOUNT) < parseInt(element.TARGET))
                                                             rest = parseInt(element.TARGET) - parseInt(element.TODAYCOUNT);
 
-                                                        set = set + "{value: " + rest + ",label: 'Task " + presentIndex + " - " + element.TITLE + "', formatted: '" + element.TODAYCOUNT + "'" + "}";
+                                                        set = set + "{value: " + rest + ",label: 'Task " + presentIndex + " - " + element.TITLE + "', labelColor: '#ffffff', formatted: '" + element.TODAYCOUNT + "'" + "}";
                                                         set = set + "],"
                                                                 + "formatter: function (x, data) { return data.formatted; }"
                                                                 + "});";
@@ -257,13 +257,13 @@ $(document).ready(function () {
                                                             set = set + "colors: ['" + color1[2] + "', '" + color2[3] + "'],";
                                                         set = set + "data: [";
 
-                                                        set = set + "{value: " + element.TODAYCOUNT + ",label: 'Task " + presentIndex + " - " + element.TITLE + "', formatted: '" + element.TODAYCOUNT + "'" + "},";
+                                                        set = set + "{value: " + element.TODAYCOUNT + ",label: 'Task " + presentIndex + " - " + element.TITLE + "', labelColor: '#ffffff', formatted: '" + element.TODAYCOUNT + "'" + "},";
 
                                                         var rest = 0;
                                                         if (parseInt(element.TODAYCOUNT) < parseInt(element.TARGET))
                                                             rest = parseInt(element.TARGET) - parseInt(element.TODAYCOUNT);
 
-                                                        set = set + "{value: " + rest + ",label: 'Task " + presentIndex + " - " + element.TITLE + "', formatted: '" + element.TODAYCOUNT + "'" + "}";
+                                                        set = set + "{value: " + rest + ",label: 'Task " + presentIndex + " - " + element.TITLE + "', labelColor: '#ffffff', formatted: '" + element.TODAYCOUNT + "'" + "}";
                                                         set = set + "],"
                                                                 + "formatter: function (x, data) { return data.formatted; }"
                                                                 + "});";
@@ -338,13 +338,13 @@ $(document).ready(function () {
                                                             set = set + "colors: ['" + color1[2] + "', '" + color2[3] + "'],";
                                                         set = set + "data: [";
 
-                                                        set = set + "{value: " + element.TODAYCOUNT + ",label: 'Task " + presentIndex + " - " + element.TITLE + "', formatted: '" + element.TODAYCOUNT + "'" + "},";
+                                                        set = set + "{value: " + element.TODAYCOUNT + ",label: 'Task " + presentIndex + " - " + element.TITLE + "', labelColor: '#ffffff', formatted: '" + element.TODAYCOUNT + "'" + "},";
 
                                                         var rest = 0;
                                                         if (parseInt(element.TODAYCOUNT) < parseInt(element.TARGET))
                                                             rest = parseInt(element.TARGET) - parseInt(element.TODAYCOUNT);
 
-                                                        set = set + "{value: " + rest + ",label: 'Task " + presentIndex + " - " + element.TITLE + "', formatted: '" + element.TODAYCOUNT + "'" + "}";
+                                                        set = set + "{value: " + rest + ",label: 'Task " + presentIndex + " - " + element.TITLE + "', labelColor: '#ffffff', formatted: '" + element.TODAYCOUNT + "'" + "}";
                                                         set = set + "],"
                                                                 + "formatter: function (x, data) { return data.formatted; }"
                                                                 + "});";

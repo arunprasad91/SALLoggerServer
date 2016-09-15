@@ -94,29 +94,16 @@ $(document).ready(function () {
                 title = parsedTask;
                 if (index == total - 1) {
                     set = set + "{ y: '" + newdate + "', a: " + element.COUNT + "}";
-//                    statementArray.push("{ y: '" + newdate + "', a: " + element.COUNT + "}");
                 } else {
                     set = set + "{ y: '" + newdate + "', a: " + element.COUNT + "},";
-//                    statementArray.push("{ y: '" + newdate + "', a: " + element.COUNT + "}");
                 }
             });
-
-//            statementArray.reverse();
-//            
-//            $.each(statementArray, function(index, element) {
-//               var total = history.length;
-//                
-//               if (index == total - 1) { 
-//                    set = set + element; 
-//               } else {
-//                   set = set + element + ","; 
-//               }
-//               
-//            });
 
             set = set + "],"
                     + "xkey: 'y',"
                     + "ykeys: ['a'],"
+                    + "eventLineColors: ['ffffff'],"
+                    + "goalLineColors: ['ffffff'],"
                     + "labels: ['Count for Task " + title + "'],"
                     + "xLabelFormat: function(x) {"
                     + "var IndexToMonth = [ 'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec' ];"
@@ -144,6 +131,8 @@ $(document).ready(function () {
             annyang.pause();
             setTimeout(speak, 1000);
             annyang.resume();
+            
+            $('path').css('stroke','ffffff');
         }
     });
 

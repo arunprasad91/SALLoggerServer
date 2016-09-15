@@ -33,6 +33,11 @@ div#visualization div.graphVisualization {
 
 .service-item h3 {
     margin-bottom: 30px;
+    color: #fff;
+}
+
+.service-item h3 p {
+    color: #fff;
 }
 
 div#visualization div.graphVisualizationHistory {
@@ -47,7 +52,7 @@ div#visualization div.graphVisualizationHistory {
     display: none;
     margin: 0 auto;
     text-align: center;
-    height: 150px;
+    height: 320px;
     width: 100%
 }
 
@@ -77,4 +82,55 @@ div#overlay img {
     text-align: center;
     margin: 20% auto;
     position: relative;
+}
+
+path {
+    stroke: rgb(0, 0, 0);
+}
+
+div#countdownTimer {
+    position:fixed;
+    top:0;
+    left:0;
+    right:0;
+    bottom:0;
+    background-color:rgba(0, 0, 0, 0.90);
+    background: url(data:;base64,iVBORw0KGgoAAAANSUhEUgAAAAIAAAACCAYAAABytg0kAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAgY0hSTQAAeiYAAICEAAD6AAAAgOgAAHUwAADqYAAAOpgAABdwnLpRPAAAABl0RVh0U29mdHdhcmUAUGFpbnQuTkVUIHYzLjUuNUmK/OAAAAATSURBVBhXY2RgYNgHxGAAYuwDAA78AjwwRoQYAAAAAElFTkSuQmCC) repeat scroll transparent\9; /* ie fallback png background image */
+    z-index:9999;
+    color:white;    
+    text-align: center;
+    display: none;
+}
+
+div#countdownTimer h3 {
+    margin-top: 10%;
+}
+
+#clockdiv{
+    font-family: sans-serif;
+    color: #fff;
+    display: inline-block;
+    font-weight: 100;
+    text-align: center;
+    font-size: 50px;
+    margin-top: 10%;
+}
+
+#clockdiv > div{
+    padding: 12.5px;
+    border-radius: 3px;
+    background: #00BF96;
+    display: inline-block;
+}
+
+#clockdiv div > span{
+    padding: 45px;
+    border-radius: 3px;
+    background: #00816A;
+    display: inline-block;
+}
+
+.smalltext{
+    padding-top: 15px;
+    font-size: 26px;
 }

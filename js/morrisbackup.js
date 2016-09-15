@@ -1737,7 +1737,7 @@ Licensed under the BSD-2-Clause License.
     };
 
     Donut.prototype.select = function(idx) {
-      var row, s, segment, _i, _len, _ref, _fill_color;
+      var row, s, segment, _i, _len, _ref;
       _ref = this.segments;
       for (_i = 0, _len = _ref.length; _i < _len; _i++) {
         s = _ref[_i];
@@ -1746,12 +1746,10 @@ Licensed under the BSD-2-Clause License.
       segment = this.segments[idx];
       segment.select();
       row = this.data[idx];
-//      return this.setLabels(row.label, this.options.formatter(row.value, row));
-      _fill_color = row.labelColor || this.options.defaultLabelColor || '#000000';
-      return this.setLabels(row.label, this.options.formatter(row.value, row), _fill_color);
+      return this.setLabels(row.label, this.options.formatter(row.value, row));
     };
 
-    Donut.prototype.setLabels = function(label1, label2, fill_color) {
+    Donut.prototype.setLabels = function(label1, label2) {
       var inner, maxHeightBottom, maxHeightTop, maxWidth, text1bbox, text1scale, text2bbox, text2scale;
       inner = (Math.min(this.el.width() / 2, this.el.height() / 2) - 10) * 2 / 3;
       maxWidth = 1.8 * inner;
@@ -1759,8 +1757,7 @@ Licensed under the BSD-2-Clause License.
       maxHeightBottom = inner / 3;
       this.text1.attr({
         text: label1,
-        transform: '',
-        fill: fill_color
+        transform: ''
       });
       text1bbox = this.text1.getBBox();
       text1scale = Math.min(maxWidth / text1bbox.width, maxHeightTop / text1bbox.height);
@@ -1769,8 +1766,7 @@ Licensed under the BSD-2-Clause License.
       });
       this.text2.attr({
         text: label2,
-        transform: '',
-        fill: fill_color
+        transform: ''
       });
       text2bbox = this.text2.getBBox();
       text2scale = Math.min(maxWidth / text2bbox.width, maxHeightBottom / text2bbox.height);
