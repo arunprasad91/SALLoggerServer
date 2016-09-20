@@ -49,8 +49,12 @@ $(document).ready(function () {
     var color1 = ['#f44336', '#3F51B5', '#4CAF50'];
     var color2 = ['#ffcdd2', '#C5CAE9', '#C8E6C9'];
 
+    var loggeruserid = "u20";
+    var loggerid = "loggerinfo2";
+    var loggername = "mylogger1";
+
     $.ajax({
-        url: 'http://belos.it.usyd.edu.au:1234/code/u20/show/history/testlogger/' + parsedTask,
+        url: 'http://belos.it.usyd.edu.au:1234/code/' + loggeruserid + '/show/history/' + loggername + '/' + parsedTask,
         type: 'GET',
 //        data: JSON.stringify(historyarr),
         dataType: 'json',
@@ -60,7 +64,7 @@ $(document).ready(function () {
         error: function (jqXHR, textStatus) {
             if (textStatus === 'timeout')
             {
-                $('#visualization').append('<div>Connection timed out!</div>')              
+                $('#visualization').append('<div>Connection timed out!</div>')
             } else {
                 $('#visualization').html('<p>Connection Error!</p>')
             }
@@ -132,8 +136,8 @@ $(document).ready(function () {
             annyang.pause();
             setTimeout(speak, 1000);
             annyang.resume();
-            
-            $('path').css('stroke','ffffff');
+
+            $('path').css('stroke', 'ffffff');
         }
     });
 

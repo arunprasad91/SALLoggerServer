@@ -136,13 +136,13 @@ $(document).ready(function () {
                                                                             set = set + "colors: ['" + color1[2] + "', '" + color2[3] + "'],";
                                                                         set = set + "data: [";
 
-                                                                        set = set + "{value: " + element.TODAYCOUNT + ",label: 'Task " + presentIndex + " - " + element.TITLE + "', labelColor: '#ffffff', formatted: '" + element.TODAYCOUNT + "'" + "},";
+                                                                        set = set + "{value: " + element.TODAYCOUNT + ",label: 'Task " + presentIndex + "\\n" + element.TITLE + "', labelColor: '#ffffff', formatted: '\\n" + element.TODAYCOUNT + "'" + "},";
 
                                                                         var rest = 0;
                                                                         if (parseInt(element.TODAYCOUNT) < parseInt(element.TARGET))
                                                                             rest = parseInt(element.TARGET) - parseInt(element.TODAYCOUNT);
 
-                                                                        set = set + "{value: " + rest + ",label: 'Task " + presentIndex + " - " + element.TITLE + "', labelColor: '#ffffff', formatted: '" + element.TODAYCOUNT + "'" + "}";
+                                                                        set = set + "{value: " + rest + ",label: 'Task " + presentIndex + "\\n" + element.TITLE + "', labelColor: '#ffffff', formatted: '\\n" + element.TODAYCOUNT + "'" + "}";
                                                                         set = set + "],"
                                                                                 + "formatter: function (x, data) { return data.formatted; }"
                                                                                 + "});";
@@ -215,13 +215,13 @@ $(document).ready(function () {
                                                                 set = set + "colors: ['" + color1[2] + "', '" + color2[3] + "'],";
                                                             set = set + "data: [";
 
-                                                            set = set + "{value: " + element.TODAYCOUNT + ",label: 'Task " + presentIndex + " - " + element.TITLE + "', labelColor: '#ffffff', formatted: '" + element.TODAYCOUNT + "'" + "},";
+                                                            set = set + "{value: " + element.TODAYCOUNT + ",label: 'Task " + presentIndex + "\\n" + element.TITLE + "', labelColor: '#ffffff', formatted: '\\n" + element.TODAYCOUNT + "'" + "},";
 
                                                             var rest = 0;
                                                             if (parseInt(element.TODAYCOUNT) < parseInt(element.TARGET))
                                                                 rest = parseInt(element.TARGET) - parseInt(element.TODAYCOUNT);
 
-                                                            set = set + "{value: " + rest + ",label: 'Task " + presentIndex + " - " + element.TITLE + "', labelColor: '#ffffff', formatted: '" + element.TODAYCOUNT + "'" + "}";
+                                                            set = set + "{value: " + rest + ",label: 'Task " + presentIndex + "\\n" + element.TITLE + "', labelColor: '#ffffff', formatted: '\\n" + element.TODAYCOUNT + "'" + "}";
                                                             set = set + "],"
                                                                     + "formatter: function (x, data) { return data.formatted; }"
                                                                     + "});";
@@ -255,7 +255,7 @@ $(document).ready(function () {
 
                         var presentIndex = index + 1;
 
-                        if (task == (element.TITLE).toLowerCase()) {
+                        if ((task).toLowerCase() == (element.TITLE).toLowerCase()) {
 
                             if (element.TYPE == 'countdowntimer') {
                                 annyang.pause();
@@ -315,7 +315,7 @@ $(document).ready(function () {
 
                                                                 $.each(newGoals, function (index, element) {
                                                                     var total = newGoals.length;
-                                                                    if (task == (element.TITLE).toLowerCase()) {
+                                                                    if ((task).toLowerCase() == (element.TITLE).toLowerCase()) {
 //                                            $.each(msg, function (index, element) {
 
                                                                         var percentage = parseFloat(parseInt(element.TODAYCOUNT, 10) * 100) / parseInt(element.TARGET, 10);
@@ -329,13 +329,13 @@ $(document).ready(function () {
                                                                             set = set + "colors: ['" + color1[2] + "', '" + color2[3] + "'],";
                                                                         set = set + "data: [";
 
-                                                                        set = set + "{value: " + element.TODAYCOUNT + ",label: 'Task " + presentIndex + " - " + element.TITLE + "', labelColor: '#ffffff', formatted: '" + element.TODAYCOUNT + "'" + "},";
+                                                                        set = set + "{value: " + element.TODAYCOUNT + ",label: 'Task " + presentIndex + "\\n" + element.TITLE + "', labelColor: '#ffffff', formatted: '\\n" + element.TODAYCOUNT + "'" + "},";
 
                                                                         var rest = 0;
                                                                         if (parseInt(element.TODAYCOUNT) < parseInt(element.TARGET))
                                                                             rest = parseInt(element.TARGET) - parseInt(element.TODAYCOUNT);
 
-                                                                        set = set + "{value: " + rest + ",label: 'Task " + presentIndex + " - " + element.TITLE + "', labelColor: '#ffffff', formatted: '" + element.TODAYCOUNT + "'" + "}";
+                                                                        set = set + "{value: " + rest + ",label: 'Task " + presentIndex + "\\n" + element.TITLE + "', labelColor: '#ffffff', formatted: '\\n" + element.TODAYCOUNT + "'" + "}";
                                                                         set = set + "],"
                                                                                 + "formatter: function (x, data) { return data.formatted; }"
                                                                                 + "});";
@@ -390,7 +390,7 @@ $(document).ready(function () {
 
                                                     $.each(newGoals, function (index, element) {
                                                         var total = newGoals.length;
-                                                        if (task == (element.TITLE).toLowerCase()) {
+                                                        if ((task).toLowerCase() == (element.TITLE).toLowerCase()) {
 //                                            $.each(msg, function (index, element) {
 
                                                             var percentage = parseFloat(parseInt(element.TODAYCOUNT, 10) * 100) / parseInt(element.TARGET, 10);
@@ -404,13 +404,13 @@ $(document).ready(function () {
                                                                 set = set + "colors: ['" + color1[2] + "', '" + color2[3] + "'],";
                                                             set = set + "data: [";
 
-                                                            set = set + "{value: " + element.TODAYCOUNT + ",label: 'Task " + presentIndex + " - " + element.TITLE + "', labelColor: '#ffffff', formatted: '" + element.TODAYCOUNT + "'" + "},";
+                                                            set = set + "{value: " + element.TODAYCOUNT + ",label: 'Task " + presentIndex + "\\n" + element.TITLE + "', labelColor: '#ffffff', formatted: '\\n" + element.TODAYCOUNT + "'" + "},";
 
                                                             var rest = 0;
                                                             if (parseInt(element.TODAYCOUNT) < parseInt(element.TARGET))
                                                                 rest = parseInt(element.TARGET) - parseInt(element.TODAYCOUNT);
 
-                                                            set = set + "{value: " + rest + ",label: 'Task " + presentIndex + " - " + element.TITLE + "', labelColor: '#ffffff', formatted: '" + element.TODAYCOUNT + "'" + "}";
+                                                            set = set + "{value: " + rest + ",label: 'Task " + presentIndex + "\\n" + element.TITLE + "', labelColor: '#ffffff', formatted: '\\n" + element.TODAYCOUNT + "'" + "}";
                                                             set = set + "],"
                                                                     + "formatter: function (x, data) { return data.formatted; }"
                                                                     + "});";
@@ -489,13 +489,13 @@ $(document).ready(function () {
                                                             set = set + "colors: ['" + color1[2] + "', '" + color2[3] + "'],";
                                                         set = set + "data: [";
 
-                                                        set = set + "{value: " + element.TODAYCOUNT + ",label: 'Task " + presentIndex + " - " + element.TITLE + "', labelColor: '#ffffff', formatted: '" + element.TODAYCOUNT + "'" + "},";
+                                                        set = set + "{value: " + element.TODAYCOUNT + ",label: 'Task " + presentIndex + "\\n" + element.TITLE + "', labelColor: '#ffffff', formatted: '\\n" + element.TODAYCOUNT + "'" + "},";
 
                                                         var rest = 0;
                                                         if (parseInt(element.TODAYCOUNT) < parseInt(element.TARGET))
                                                             rest = parseInt(element.TARGET) - parseInt(element.TODAYCOUNT);
 
-                                                        set = set + "{value: " + rest + ",label: 'Task " + presentIndex + " - " + element.TITLE + "', labelColor: '#ffffff', formatted: '" + element.TODAYCOUNT + "'" + "}";
+                                                        set = set + "{value: " + rest + ",label: 'Task " + presentIndex + "\\n" + element.TITLE + "', labelColor: '#ffffff', formatted: '\\n" + element.TODAYCOUNT + "'" + "}";
                                                         set = set + "],"
                                                                 + "formatter: function (x, data) { return data.formatted; }"
                                                                 + "});";
@@ -528,7 +528,7 @@ $(document).ready(function () {
 
                         var presentIndex = index + 1;
 
-                        if (task == (element.TITLE).toLowerCase()) {
+                        if ((task).toLowerCase() == (element.TITLE).toLowerCase()) {
 //                            alert(element.goalId);
 //                            var undoArray = {
 //                                function: 'undoTask',
@@ -556,7 +556,7 @@ $(document).ready(function () {
 
                                                 $.each(newGoals, function (index, element) {
                                                     var total = newGoals.length;
-                                                    if (task == (element.TITLE).toLowerCase()) {
+                                                    if ((task).toLowerCase() == (element.TITLE).toLowerCase()) {
 
 //                                            $.each(msg, function (index, element) {
 
@@ -571,13 +571,13 @@ $(document).ready(function () {
                                                             set = set + "colors: ['" + color1[2] + "', '" + color2[3] + "'],";
                                                         set = set + "data: [";
 
-                                                        set = set + "{value: " + element.TODAYCOUNT + ",label: 'Task " + presentIndex + " - " + element.TITLE + "', labelColor: '#ffffff', formatted: '" + element.TODAYCOUNT + "'" + "},";
+                                                        set = set + "{value: " + element.TODAYCOUNT + ",label: 'Task " + presentIndex + "\\n" + element.TITLE + "', labelColor: '#ffffff', formatted: '\\n" + element.TODAYCOUNT + "'" + "},";
 
                                                         var rest = 0;
                                                         if (parseInt(element.TODAYCOUNT) < parseInt(element.TARGET))
                                                             rest = parseInt(element.TARGET) - parseInt(element.TODAYCOUNT);
 
-                                                        set = set + "{value: " + rest + ",label: 'Task " + presentIndex + " - " + element.TITLE + "', labelColor: '#ffffff', formatted: '" + element.TODAYCOUNT + "'" + "}";
+                                                        set = set + "{value: " + rest + ",label: 'Task " + presentIndex + "\\n" + element.TITLE + "', labelColor: '#ffffff', formatted: '\\n" + element.TODAYCOUNT + "'" + "}";
                                                         set = set + "],"
                                                                 + "formatter: function (x, data) { return data.formatted; }"
                                                                 + "});";

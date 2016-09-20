@@ -16,7 +16,8 @@ div#visualization {
 }
 
 div#visualization div.graphVisualization {
-    width: 33%;
+/*    width: 33%;*/
+    width: 20%;
     /*display: flex;*/    
     float: left;
     min-width: 20%;
@@ -139,3 +140,9 @@ div#countdownTimer h3 {
     height: 300px;
     width: 330px;
 }
+
+.graphVisualization svg text {
+    font-family: "Segoe UI", Frutiger, "Frutiger Linotype", "Dejavu Sans", "Helvetica Neue", Arial, sans-serif !important;
+    font-weight: 500 !important;
+}
+
