@@ -647,6 +647,7 @@ $(document).ready(function () {
                     'undo task :number': undoActivity1,
                     'undo *task': undoActivity2,
                     'task :number history': taskHistory,
+                    'history for task :number': taskHistory,
                     'history for *task': taskHistory2
                 };
 

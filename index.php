@@ -20,10 +20,10 @@
 
     </head>
     <body>
-        <div class="jumbotron home home-fullscreen" id="home">
+<!--        <div class="jumbotron home home-fullscreen" id="home">
             <div class="mask"></div>
             <a href="" class="menu-toggle" id="nav-expander"><i class="fa fa-bars"></i></a>
-            <!-- Offsite navigation -->
+             Offsite navigation 
             <nav class="menu">
                 <a href="#" class="close"><i class="fa fa-close"></i></a>
                 <h3>Menu</h3>
@@ -41,15 +41,15 @@
                     <a href="#" class="btn btn-primary">Say 'Hello'</a>
                 </div>
             </div>
-        </div>
+        </div>-->
         <!-- Services section start -->
         <section id="services">
             <div class="container">
                 <div class="row">
                     <div class="col-md-12">
                         <div class="service-item">
-                            <a href="#" class="btn btn-primary">Say 'Log.. task name' OR 'Log.. task number'</a>
-                            <!--<div class="icon"><i class="fa fa-diamond"></i></div>-->
+<!--                            <a href="#" class="btn btn-primary">Say 'Log.. task name' OR 'Log.. task number'</a>
+                            <div class="icon"><i class="fa fa-diamond"></i></div>-->
                             <h3 id="message">Logger</h3>
                             <h3 id="message2"></h3>
                         </div>

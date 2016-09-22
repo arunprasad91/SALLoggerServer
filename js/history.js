@@ -107,6 +107,7 @@ $(document).ready(function () {
             set = set + "],"
                     + "xkey: 'y',"
                     + "ykeys: ['a'],"
+                    + "lineColors: ['#FFC107'],"
                     + "eventLineColors: ['ffffff'],"
                     + "goalLineColors: ['ffffff'],"
                     + "labels: ['Count for Task " + title + "'],"
@@ -115,6 +116,8 @@ $(document).ready(function () {
                     + "var month = IndexToMonth[ x.getMonth() ];"
                     + "var year = x.getFullYear();"
                     + "var day = x.getDate() + 1;"
+                    + "if(day >= 31)"
+                    + "day = 31;"
                     + "return day + ' ' + month;"
                     + "}"
                     + "});";
