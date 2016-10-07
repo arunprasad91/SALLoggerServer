@@ -20,12 +20,11 @@
 
     </head>
     <body>
-        <section id="services">
+        <section id="services" class="history">
             <div class="container">
                 <div class="row">
                     <div class="col-md-12">
                         <div class="service-item">
-                            <a href="#" class="btn btn-primary">Say 'Back' OR 'Go Back'</a>
                             <h3 id="message">Logger</h3>                            
                         </div>
                     </div>				

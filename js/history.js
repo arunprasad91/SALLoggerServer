@@ -36,6 +36,7 @@ $(document).ready(function () {
 
     var parsedGoalId = qsParm['id'];
     var parsedTask = qsParm['task'];
+    var parsedTarget = qsParm['target'];
     parsedTask = parsedTask.replace(/%20/g, " ");
 
 //    var historyarr = {
@@ -107,9 +108,11 @@ $(document).ready(function () {
             set = set + "],"
                     + "xkey: 'y',"
                     + "ykeys: ['a'],"
-                    + "lineColors: ['#FFC107'],"
-                    + "eventLineColors: ['ffffff'],"
-                    + "goalLineColors: ['ffffff'],"
+                    + "lineColors: ['#2E7D32'],"
+//                    + "eventLineColors: ['ffffff'],"
+                    + "goals: [" + parsedTarget + "],"
+                    + "goalLineColors: ['#4CAF50'],"
+                    + "goalStrokeWidth: 5,"
                     + "labels: ['Count for Task " + title + "'],"
                     + "xLabelFormat: function(x) {"
                     + "var IndexToMonth = [ 'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec' ];"

@@ -7,7 +7,7 @@ $(document).ready(function () {
 
     var color1 = ['#f44336', '#FFC107', '#4CAF50'];
 //    var color2 = ['#ef9a9a', '#FFE082', '#A5D6A7'];
-    var color2 = ['#37474F', '#37474F', '#37474F'];
+    var color2 = ['#212121', '#212121', '#212121'];
 
     var loggeruserid = "u20";
     var loggerid = "loggerinfo2";
@@ -73,13 +73,13 @@ $(document).ready(function () {
 ////                    if(parseInt(element.TODAYCOUNT) > parseInt(element.TARGET))
 ////                        set = set + "{value: " + element.TARGET + ",label: 'Task " + presentIndex + " - " + element.TITLE + "', formatted: '" + element.TODAYCOUNT + "'" + "},";
 //                    else
-                        set = set + "{value: " + element1.TODAYCOUNT + ",label: 'Task " + presentIndex + "\\n" + element1.TITLE + "', labelColor: '#ffffff', formatted: '\\n" + element1.TODAYCOUNT + "'" + "},";
+                        set = set + "{value: " + element1.TODAYCOUNT + ",label: 'Task " + presentIndex + "\\n" + element1.TITLE + "', labelColor: '#ffffff', formatted: '\\n" + element1.TODAYCOUNT + "/" + element1.TARGET + "'" + "},";
 
                         var rest = 0;
                         if (parseInt(element1.TODAYCOUNT) < parseInt(element1.TARGET))
                             rest = parseInt(element1.TARGET) - parseInt(element1.TODAYCOUNT);
 
-                        set = set + "{value: " + rest + ",label: 'Task " + presentIndex + "\\n" + element1.TITLE + "', labelColor: '#ffffff', formatted: '\\n" + element1.TODAYCOUNT + "'" + "}";
+                        set = set + "{value: " + rest + ",label: 'Task " + presentIndex + "\\n" + element1.TITLE + "', labelColor: '#ffffff', formatted: '\\n" + element1.TODAYCOUNT + "/" + element1.TARGET + "'" + "}";
 
 //                    set = set + "{value: " + element.TARGET + ",label: 'Task " + presentIndex + " - " + element.TITLE + "', formatted: '" + element.TODAYCOUNT + "'" + "}";
                         set = set + "],"

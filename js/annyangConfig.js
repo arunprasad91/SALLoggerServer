@@ -27,15 +27,18 @@ $(document).ready(function () {
     responsiveVoice.setDefaultVoice("US English Female");
 
     var color1 = ['#f44336', '#FFC107', '#4CAF50'];
-    var color2 = ['#ef9a9a', '#FFE082', '#A5D6A7'];
+//    var color2 = ['#ef9a9a', '#FFE082', '#A5D6A7'];
+    var color2 = ['#212121', '#212121', '#212121'];
 
     function isNumber(n) {
         return !isNaN(parseFloat(n)) && isFinite(n);
     }
-    
+
     var loggeruserid = "u20";
-    var loggerid = "loggerinfo2";    
+    var loggerid = "loggerinfo2";
     var loggername = "mylogger1";
+    
+    var cancelTimer = false;
 
 
     $.ajax({
@@ -74,6 +77,7 @@ $(document).ready(function () {
                                     var seconds = Math.floor((t / 1000) % 60);
                                     var minutes = Math.floor((t / 1000 / 60) % 60);
                                     var hours = Math.floor((t / (1000 * 60 * 60)) % 24);
+
                                     return {
                                         'total': t,
                                         'minutes': minutes,
@@ -81,12 +85,26 @@ $(document).ready(function () {
                                     };
                                 }
 
+
                                 function initializeClock(id, endtime) {
                                     var clock = document.getElementById(id);
                                     var minutesSpan = clock.querySelector('.minutes');
                                     var secondsSpan = clock.querySelector('.seconds');
 
+                                    var setTimerCommand = false;
+                                    var exitFunction = false;
+
+
                                     function updateClock() {
+
+                                        if (cancelTimer == true) {
+                                            $('#countdownTimer').css('display', 'none');
+                                            clearInterval(timeinterval);
+                                            cancelTimer = false;
+                                            var toSpeak = "task " + element.ID + ", cancelled";
+                                            responsiveVoice.speak(toSpeak);
+                                        }
+
                                         var t = getTimeRemaining(endtime);
 
                                         minutesSpan.innerHTML = ('0' + t.minutes).slice(-2);
@@ -136,13 +154,13 @@ $(document).ready(function () {
                                                                             set = set + "colors: ['" + color1[2] + "', '" + color2[3] + "'],";
                                                                         set = set + "data: [";
 
-                                                                        set = set + "{value: " + element.TODAYCOUNT + ",label: 'Task " + presentIndex + "\\n" + element.TITLE + "', labelColor: '#ffffff', formatted: '\\n" + element.TODAYCOUNT + "'" + "},";
+                                                                        set = set + "{value: " + element.TODAYCOUNT + ",label: 'Task " + presentIndex + "\\n" + element.TITLE + "', labelColor: '#ffffff', formatted: '\\n" + element.TODAYCOUNT + "/" + element.TARGET + "'" + "},";
 
                                                                         var rest = 0;
                                                                         if (parseInt(element.TODAYCOUNT) < parseInt(element.TARGET))
                                                                             rest = parseInt(element.TARGET) - parseInt(element.TODAYCOUNT);
 
-                                                                        set = set + "{value: " + rest + ",label: 'Task " + presentIndex + "\\n" + element.TITLE + "', labelColor: '#ffffff', formatted: '\\n" + element.TODAYCOUNT + "'" + "}";
+                                                                        set = set + "{value: " + rest + ",label: 'Task " + presentIndex + "\\n" + element.TITLE + "', labelColor: '#ffffff', formatted: '\\n" + element.TODAYCOUNT + "/" + element.TARGET + "'" + "}";
                                                                         set = set + "],"
                                                                                 + "formatter: function (x, data) { return data.formatted; }"
                                                                                 + "});";
@@ -173,7 +191,7 @@ $(document).ready(function () {
                                 }
 
 //                                var deadline = new Date(Date.parse(new Date()) + 01 * 10 * 1000);
-                                var deadline = new Date(Date.parse(new Date()) + (time[0]+1) * time[1] * 1000);
+                                var deadline = new Date(Date.parse(new Date()) + (time[0] + 1) * time[1] * 1000);
                                 initializeClock('clockdiv', deadline);
                             } else if (element.TYPE == 'tap') {
                                 $.ajax({
@@ -215,13 +233,13 @@ $(document).ready(function () {
                                                                 set = set + "colors: ['" + color1[2] + "', '" + color2[3] + "'],";
                                                             set = set + "data: [";
 
-                                                            set = set + "{value: " + element.TODAYCOUNT + ",label: 'Task " + presentIndex + "\\n" + element.TITLE + "', labelColor: '#ffffff', formatted: '\\n" + element.TODAYCOUNT + "'" + "},";
+                                                            set = set + "{value: " + element.TODAYCOUNT + ",label: 'Task " + presentIndex + "\\n" + element.TITLE + "', labelColor: '#ffffff', formatted: '\\n" + element.TODAYCOUNT + "/" + element.TARGET + "'" + "},";
 
                                                             var rest = 0;
                                                             if (parseInt(element.TODAYCOUNT) < parseInt(element.TARGET))
                                                                 rest = parseInt(element.TARGET) - parseInt(element.TODAYCOUNT);
 
-                                                            set = set + "{value: " + rest + ",label: 'Task " + presentIndex + "\\n" + element.TITLE + "', labelColor: '#ffffff', formatted: '\\n" + element.TODAYCOUNT + "'" + "}";
+                                                            set = set + "{value: " + rest + ",label: 'Task " + presentIndex + "\\n" + element.TITLE + "', labelColor: '#ffffff', formatted: '\\n" + element.TODAYCOUNT + "/" + element.TARGET + "'" + "}";
                                                             set = set + "],"
                                                                     + "formatter: function (x, data) { return data.formatted; }"
                                                                     + "});";
@@ -277,12 +295,25 @@ $(document).ready(function () {
                                     };
                                 }
 
+
+
                                 function initializeClock(id, endtime) {
                                     var clock = document.getElementById(id);
                                     var minutesSpan = clock.querySelector('.minutes');
                                     var secondsSpan = clock.querySelector('.seconds');
 
+                                    var setTimerCommand = false;
+                                    var exitFunction = false;
+
                                     function updateClock() {
+
+                                        if (cancelTimer == true) {
+                                            $('#countdownTimer').css('display', 'none');
+                                            clearInterval(timeinterval);
+                                            var toSpeak = "task " + element.ID + ", cancelled";
+                                            responsiveVoice.speak(toSpeak);
+                                        }
+
                                         var t = getTimeRemaining(endtime);
 
                                         minutesSpan.innerHTML = ('0' + t.minutes).slice(-2);
@@ -329,13 +360,13 @@ $(document).ready(function () {
                                                                             set = set + "colors: ['" + color1[2] + "', '" + color2[3] + "'],";
                                                                         set = set + "data: [";
 
-                                                                        set = set + "{value: " + element.TODAYCOUNT + ",label: 'Task " + presentIndex + "\\n" + element.TITLE + "', labelColor: '#ffffff', formatted: '\\n" + element.TODAYCOUNT + "'" + "},";
+                                                                        set = set + "{value: " + element.TODAYCOUNT + ",label: 'Task " + presentIndex + "\\n" + element.TITLE + "', labelColor: '#ffffff', formatted: '\\n" + element.TODAYCOUNT + "/" + element.TARGET + "'" + "},";
 
                                                                         var rest = 0;
                                                                         if (parseInt(element.TODAYCOUNT) < parseInt(element.TARGET))
                                                                             rest = parseInt(element.TARGET) - parseInt(element.TODAYCOUNT);
 
-                                                                        set = set + "{value: " + rest + ",label: 'Task " + presentIndex + "\\n" + element.TITLE + "', labelColor: '#ffffff', formatted: '\\n" + element.TODAYCOUNT + "'" + "}";
+                                                                        set = set + "{value: " + rest + ",label: 'Task " + presentIndex + "\\n" + element.TITLE + "', labelColor: '#ffffff', formatted: '\\n" + element.TODAYCOUNT + "/" + element.TARGET + "'" + "}";
                                                                         set = set + "],"
                                                                                 + "formatter: function (x, data) { return data.formatted; }"
                                                                                 + "});";
@@ -365,7 +396,7 @@ $(document).ready(function () {
                                     var timeinterval = setInterval(updateClock, 1000);
                                 }
 
-                                var deadline = new Date(Date.parse(new Date()) + (time[0]+1) * time[1] * 1000);
+                                var deadline = new Date(Date.parse(new Date()) + (time[0] + 1) * time[1] * 1000);
                                 initializeClock('clockdiv', deadline);
                             } else if (element.TYPE == 'tap') {
                                 $.ajax({
@@ -404,13 +435,13 @@ $(document).ready(function () {
                                                                 set = set + "colors: ['" + color1[2] + "', '" + color2[3] + "'],";
                                                             set = set + "data: [";
 
-                                                            set = set + "{value: " + element.TODAYCOUNT + ",label: 'Task " + presentIndex + "\\n" + element.TITLE + "', labelColor: '#ffffff', formatted: '\\n" + element.TODAYCOUNT + "'" + "},";
+                                                            set = set + "{value: " + element.TODAYCOUNT + ",label: 'Task " + presentIndex + "\\n" + element.TITLE + "', labelColor: '#ffffff', formatted: '\\n" + element.TODAYCOUNT + "/" + element.TARGET + "'" + "},";
 
                                                             var rest = 0;
                                                             if (parseInt(element.TODAYCOUNT) < parseInt(element.TARGET))
                                                                 rest = parseInt(element.TARGET) - parseInt(element.TODAYCOUNT);
 
-                                                            set = set + "{value: " + rest + ",label: 'Task " + presentIndex + "\\n" + element.TITLE + "', labelColor: '#ffffff', formatted: '\\n" + element.TODAYCOUNT + "'" + "}";
+                                                            set = set + "{value: " + rest + ",label: 'Task " + presentIndex + "\\n" + element.TITLE + "', labelColor: '#ffffff', formatted: '\\n" + element.TODAYCOUNT + "/" + element.TARGET + "'" + "}";
                                                             set = set + "],"
                                                                     + "formatter: function (x, data) { return data.formatted; }"
                                                                     + "});";
@@ -489,13 +520,13 @@ $(document).ready(function () {
                                                             set = set + "colors: ['" + color1[2] + "', '" + color2[3] + "'],";
                                                         set = set + "data: [";
 
-                                                        set = set + "{value: " + element.TODAYCOUNT + ",label: 'Task " + presentIndex + "\\n" + element.TITLE + "', labelColor: '#ffffff', formatted: '\\n" + element.TODAYCOUNT + "'" + "},";
+                                                        set = set + "{value: " + element.TODAYCOUNT + ",label: 'Task " + presentIndex + "\\n" + element.TITLE + "', labelColor: '#ffffff', formatted: '\\n" + element.TODAYCOUNT + "/" + element.TARGET + "'" + "},";
 
                                                         var rest = 0;
                                                         if (parseInt(element.TODAYCOUNT) < parseInt(element.TARGET))
                                                             rest = parseInt(element.TARGET) - parseInt(element.TODAYCOUNT);
 
-                                                        set = set + "{value: " + rest + ",label: 'Task " + presentIndex + "\\n" + element.TITLE + "', labelColor: '#ffffff', formatted: '\\n" + element.TODAYCOUNT + "'" + "}";
+                                                        set = set + "{value: " + rest + ",label: 'Task " + presentIndex + "\\n" + element.TITLE + "', labelColor: '#ffffff', formatted: '\\n" + element.TODAYCOUNT + "/" + element.TARGET + "'" + "}";
                                                         set = set + "],"
                                                                 + "formatter: function (x, data) { return data.formatted; }"
                                                                 + "});";
@@ -571,13 +602,13 @@ $(document).ready(function () {
                                                             set = set + "colors: ['" + color1[2] + "', '" + color2[3] + "'],";
                                                         set = set + "data: [";
 
-                                                        set = set + "{value: " + element.TODAYCOUNT + ",label: 'Task " + presentIndex + "\\n" + element.TITLE + "', labelColor: '#ffffff', formatted: '\\n" + element.TODAYCOUNT + "'" + "},";
+                                                        set = set + "{value: " + element.TODAYCOUNT + ",label: 'Task " + presentIndex + "\\n" + element.TITLE + "', labelColor: '#ffffff', formatted: '\\n" + element.TODAYCOUNT + "/" + element.TARGET + "'" + "},";
 
                                                         var rest = 0;
                                                         if (parseInt(element.TODAYCOUNT) < parseInt(element.TARGET))
                                                             rest = parseInt(element.TARGET) - parseInt(element.TODAYCOUNT);
 
-                                                        set = set + "{value: " + rest + ",label: 'Task " + presentIndex + "\\n" + element.TITLE + "', labelColor: '#ffffff', formatted: '\\n" + element.TODAYCOUNT + "'" + "}";
+                                                        set = set + "{value: " + rest + ",label: 'Task " + presentIndex + "\\n" + element.TITLE + "', labelColor: '#ffffff', formatted: '\\n" + element.TODAYCOUNT + "/" + element.TARGET + "'" + "}";
                                                         set = set + "],"
                                                                 + "formatter: function (x, data) { return data.formatted; }"
                                                                 + "});";
@@ -613,9 +644,9 @@ $(document).ready(function () {
                         $.each(goals, function (index, element) {
 
                             var presentIndex = index + 1;
-
+                            
                             if (parseInt(number) == presentIndex) {
-                                window.location = 'history.php?id=' + presentIndex + '&task=' + element.TITLE;
+                                window.location = 'history.php?id=' + presentIndex + '&task=' + element.TITLE + "&target=" + element.TARGET;
                             }
                         });
                     }
@@ -630,13 +661,21 @@ $(document).ready(function () {
                         var presentIndex = index + 1;
 
                         if (task == (element.TITLE).toLowerCase()) {
-                            window.location = 'history.php?id=' + presentIndex + '&task=' + element.TITLE;
+                            window.location = 'history.php?id=' + presentIndex + '&task=' + element.TITLE + "&target=" + element.TARGET;
                         }
                     });
                 }
 
+                var goback = function () {
+                    cancelTimer = true;
+                }
 
-
+                var temporaryCommands = {
+                    'go back': goback,
+                    'back': goback,
+                    'cancel': goback
+                };
+                
                 var commands = {
 //                    'hello': hello,
 //                    '*speech': showText,
@@ -653,6 +692,7 @@ $(document).ready(function () {
 
                 annyang.debug([newState = true]);
                 annyang.addCommands(commands);
+                annyang.addCommands(temporaryCommands);
 
                 annyang.setLanguage('en-IN');
 

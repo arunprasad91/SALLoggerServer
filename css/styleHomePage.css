@@ -148,3 +148,7 @@ div#countdownTimer h3 {
     font-size: 18px;
 }
 
+section.history {
+    min-height: 767px;
+}
+
