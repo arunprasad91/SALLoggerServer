@@ -1,0 +1,29 @@
+#services {
+    min-height: 700px;
+}
+
+.textInput {
+    border: none;
+    width: 200px;
+    font-family: "Segoe UI", Frutiger, "Frutiger Linotype", "Dejavu Sans", "Helvetica Neue", Arial, sans-serif !important;
+    height: 30px;
+}
+
+label {
+    color: #fff !important;
+    padding: 10px;
+}
+
+.service-item .row {
+    padding: 15px;
+}
+
+
+#submit {
+    width: 200px;    
+    font-family: "Segoe UI", Frutiger, "Frutiger Linotype", "Dejavu Sans", "Helvetica Neue", Arial, sans-serif !important;    
+}
+
+#content {
+    display: none;
+}

@@ -1,5 +1,37 @@
 $(document).ready(function () {
 
+//    var qsParm = new Array();
+
+//    function qs() {
+//        var query = window.location.search.substring(1);
+//        var parms = query.split('&');
+//        for (var i = 0; i < parms.length; i++) {
+//            var pos = parms[i].indexOf('=');
+//            if (pos > 0) {
+//                var key = parms[i].substring(0, pos);
+//                var val = parms[i].substring(pos + 1);
+//                qsParm[key] = val;
+//            }
+//        }
+//    }
+//
+//    qs();
+
+    function getCookie(cname) {
+        var name = cname + "=";
+        var ca = document.cookie.split(';');
+        for (var i = 0; i < ca.length; i++) {
+            var c = ca[i];
+            while (c.charAt(0) == ' ') {
+                c = c.substring(1);
+            }
+            if (c.indexOf(name) == 0) {
+                return c.substring(name.length, c.length);
+            }
+        }
+        return "";
+    }
+
     var arr = {
         function: 'getGoalsForUser',
         userId: '1'
@@ -9,9 +41,22 @@ $(document).ready(function () {
 //    var color2 = ['#ef9a9a', '#FFE082', '#A5D6A7'];
     var color2 = ['#212121', '#212121', '#212121'];
 
-    var loggeruserid = "u20";
-    var loggerid = "loggerinfo2";
-    var loggername = "mylogger1";
+
+     if (getCookie('SALLogger') == 'TRUE') {
+        var loggeruserid = getCookie('loggeruserid');
+        var loggerid = getCookie('loggerid');
+        var loggername = getCookie('loggername');
+     }
+
+//    if (qsParm['loggeruserid'] != '' || qsParm['loggerid'] != '' || qsParm['loggername'] != '') {
+//        var loggeruserid = qsParm['loggeruserid'];
+//        var loggerid = qsParm['loggerid'];
+//        var loggername = qsParm['loggername'];
+//    } else {
+//        var loggeruserid = "u20";
+//        var loggerid = "loggerinfo2";
+//        var loggername = "mylogger1";
+//    }
 
     function refreshPage() {
 

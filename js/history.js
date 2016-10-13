@@ -34,6 +34,7 @@ $(document).ready(function () {
         oldf.apply(console, arguments);
     }
 
+
     var parsedGoalId = qsParm['id'];
     var parsedTask = qsParm['task'];
     var parsedTarget = qsParm['target'];
@@ -50,9 +51,31 @@ $(document).ready(function () {
     var color1 = ['#f44336', '#3F51B5', '#4CAF50'];
     var color2 = ['#ffcdd2', '#C5CAE9', '#C8E6C9'];
 
-    var loggeruserid = "u20";
-    var loggerid = "loggerinfo2";
-    var loggername = "mylogger1";
+
+    function getCookie(cname) {
+        var name = cname + "=";
+        var ca = document.cookie.split(';');
+        for (var i = 0; i < ca.length; i++) {
+            var c = ca[i];
+            while (c.charAt(0) == ' ') {
+                c = c.substring(1);
+            }
+            if (c.indexOf(name) == 0) {
+                return c.substring(name.length, c.length);
+            }
+        }
+        return "";
+    }
+
+    if (getCookie('SALLogger') == 'TRUE') {
+        var loggeruserid = getCookie('loggeruserid');
+        var loggerid = getCookie('loggerid');
+        var loggername = getCookie('loggername');
+    }
+
+//    var loggeruserid = "u20";
+//    var loggerid = "loggerinfo2";
+//    var loggername = "mylogger1";
 
     $.ajax({
         url: 'http://belos.it.usyd.edu.au:1234/code/' + loggeruserid + '/show/history/' + loggername + '/' + parsedTask,
@@ -149,7 +172,7 @@ $(document).ready(function () {
 
     if (annyang) {
         var goback = function () {
-            window.location = 'index.php';
+            window.location = 'homePage.php';
         }
 
         var commands = {
