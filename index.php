@@ -30,8 +30,8 @@
                                 <div class="row">
                                     <label>Logger User ID</label><input type="text" id="loggerUserID" class="textInput" required>
                                 </div>
-                                <div class="row">
-                                    <label>Logger ID</label><input type="text" id="loggerID" class="textInput" required>
+                                <div class="row" style="display: none;">
+                                    <label>Logger ID</label><input type="text" id="loggerID" class="textInput" value="loggerinfo2" required>
                                 </div>
                                 <div class="row">
                                     <label>Logger Name</label><input type="text" id="loggerName" class="textInput" required> 

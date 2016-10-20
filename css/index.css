@@ -1,5 +1,5 @@
 #services {
-    min-height: 700px;
+    min-height: 800px;
 }
 
 .textInput {
@@ -27,3 +27,4 @@ label {
 #content {
     display: none;
 }
+

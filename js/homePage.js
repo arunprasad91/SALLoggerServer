@@ -61,7 +61,7 @@ $(document).ready(function () {
     function refreshPage() {
 
         $.ajax({
-            url: 'http://belos.it.usyd.edu.au:1234/code/' + loggeruserid + '/show/' + loggerid + '/' + loggername,
+            url: 'http://belos.it.usyd.edu.au:1234/code/' + loggeruserid + '/show/loggerinfo2/' + loggername,
 //        url: 'http://belos.it.usyd.edu.au:1234/code/u20/show/loggerinfo2/testlogger',
             type: 'GET',
 //        data: JSON.stringify(arr),
